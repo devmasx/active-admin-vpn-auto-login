@@ -1,4 +1,4 @@
-ActiveAdminVpn.configure do |config|
+ActiveAdmin::VpnAutoLogin.configure do |config|
   # ------------------------------------------------------------
   # VPN IP ranges (CIDR notation, comma-separated)
   # ------------------------------------------------------------
@@ -7,8 +7,6 @@ ActiveAdminVpn.configure do |config|
   #
   # Or leave it blank and set the environment variable instead:
   #   VPN_IP_RANGE="10.0.0.0/8,192.168.1.0/24"
-  #
-  # The env var is always the fallback when ip_ranges is not set.
   #
   # config.ip_ranges = ENV["VPN_IP_RANGE"]
 

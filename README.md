@@ -63,19 +63,6 @@ as the given `AdminUser` — no username/password required.
 
 ---
 
-## Route constraint (optional)
-
-If you prefer to block at the routing layer instead of the controller layer:
-
-```ruby
-# config/routes.rb
-constraints(ActiveAdminVpn::VpnConstraint) do
-  ActiveAdmin.routes(self)
-end
-```
-
----
-
 ## Trusted proxies
 
 If your app runs behind a load balancer or reverse proxy, make sure Rails trusts
