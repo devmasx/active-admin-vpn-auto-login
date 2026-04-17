@@ -12,41 +12,33 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby_version: ["2.5", "2.6", "2.7"]
+        ruby_version: ["3.0", "3.1", "3.2", "3.3"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Set up Ruby versions
-        uses: actions/setup-ruby@v1
+      - name: Set up Ruby ${{ matrix.ruby_version }}
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
+          bundler-cache: true
 
-      - name: Build
-        run: |
-          gem install bundler --version 1.16.6
-          bundle install --jobs 4 --retry 3
-          gem install rspec
       - name: Test
-        run: |
-          rspec
+        run: bundle exec rspec
+
   deploy:
     if: contains(github.ref, 'refs/tags/v')
     needs: test
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Set up Ruby 2.5
-        uses: actions/setup-ruby@v1
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.5
-
-      - name: Build
-        run: |
-          gem install bundler --version 1.16.6
-          bundle install --jobs 4 --retry 3
+          ruby-version: "3.2"
+          bundler-cache: true
 
       - name: Publish to RubyGems
         uses: devmasx/publish-rubygems-action@master
