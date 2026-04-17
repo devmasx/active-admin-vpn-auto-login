@@ -1,4 +1,4 @@
-# ActiveAdminVpn
+# ActiveAdmin::VpnAutoLogin
 
 Restrict access to [ActiveAdmin](https://activeadmin.info/) to requests coming from
 configured VPN IP ranges. Optionally auto-login VPN users so they skip the login form.
@@ -8,17 +8,17 @@ configured VPN IP ranges. Optionally auto-login VPN users so they skip the login
 Add to your Gemfile:
 
 ```ruby
-gem "active_admin_vpn"
+gem "active-admin-vpn-auto-login", github: "devmasx/active-admin-vpn-auto-login"
 ```
 
 Then run:
 
 ```bash
 bundle install
-rails generate active_admin_vpn:install
+rails generate active_admin:vpn_auto_login:install
 ```
 
-This creates `config/initializers/active_admin_vpn.rb`.
+This creates `config/initializers/active_admin_vpn_auto_login.rb`.
 
 ---
 
@@ -37,8 +37,8 @@ The gem reads this automatically — no extra code needed.
 ### Option 2 — Initializer
 
 ```ruby
-# config/initializers/active_admin_vpn.rb
-ActiveAdminVpn.configure do |config|
+# config/initializers/active_admin_vpn_auto_login.rb
+ActiveAdmin::VpnAutoLogin.configure do |config|
   config.ip_ranges = "10.0.0.0/8,192.168.1.0/24"
 end
 ```
@@ -48,7 +48,7 @@ end
 ## Auto-login (skip login form on VPN)
 
 ```ruby
-ActiveAdminVpn.configure do |config|
+ActiveAdmin::VpnAutoLogin.configure do |config|
   config.ip_ranges        = ENV["VPN_IP_RANGE"]
   config.auto_login       = true
   config.auto_login_email = "admin@yourcompany.com"
